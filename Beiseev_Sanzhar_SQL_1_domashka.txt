@@ -1,0 +1,49 @@
+--create database Market
+--use Market
+
+create table customers
+(
+ID_customer int not null primary key identity(1,1),
+name nvarchar(50),
+phone int,
+mail nvarchar(50),
+);
+
+go
+
+create table shops
+(
+ID_shop int not null primary key identity(1,1),
+adress_shop nvarchar(50),
+name_shop nvarchar(50)
+);
+
+go
+
+create table goods
+(
+ID_good int not null primary key identity(1,1),
+name_good nvarchar(50),
+description_good nvarchar(50),
+price int,
+owner nvarchar(50),
+ID_shop int foreign key references shops(ID_shop),
+--ili
+--ID_shop int primary key (ID_shop),
+--constraint FK_ID_shop foreign key (ID_shop) references shops(ID_shop),
+coming_date date,
+date_production date
+);
+
+go
+
+create table orders
+(
+ID_order int not null primary key identity(1,1),
+ID_customer int foreign key references customers(ID_customer),
+ID_good int foreign key references goods(ID_good),
+date_order date,
+status_order nvarchar(50)
+);
+
+go
